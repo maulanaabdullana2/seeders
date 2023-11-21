@@ -52,15 +52,21 @@ const register = async (req, res, next) => {
         message: 'Email already in use',
       });
     }
-
-    const hashedPassword = bcrypt.hashSync(password, 10);
-
     if (password.length < 6) {
       return res.status(400).json({
         status: 'Error',
         message: 'Password must be at least 6 characters long.',
       });
     }
+
+    if (mobile) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Phone Number Already use',
+      });
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     const users = await Users.create({
       name,
