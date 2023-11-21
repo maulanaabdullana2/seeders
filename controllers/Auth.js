@@ -44,9 +44,10 @@ const register = async (req, res, next) => {
   try {
     const { name, email, mobile, password } = req.body;
 
-    const existingUser = await Users.findOne({ email });
+    const existingemail = await Users.findOne({ email });
+    const existingmobile = await Users.findOne({ mobile });
 
-    if (existingUser) {
+    if (existingemail) {
       return res.status(400).json({
         status: 'Error',
         message: 'Email already in use',
@@ -59,7 +60,7 @@ const register = async (req, res, next) => {
       });
     }
 
-    if (mobile) {
+    if (existingmobile) {
       return res.status(400).json({
         status: 'error',
         message: 'Phone Number Already use',
