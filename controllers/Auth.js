@@ -1,6 +1,7 @@
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ApiError = require('../utils/apiError');
 
 const login = async (req, res, next) => {
   try {
@@ -35,8 +36,7 @@ const login = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.error(error);
-    next(error);
+    next(new ApiError(error.message));
   }
 };
 
@@ -82,7 +82,7 @@ const register = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    next(new ApiError(error.message));
   }
 };
 
