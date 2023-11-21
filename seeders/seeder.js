@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
 const UserModel = require('../models/Users');
@@ -7,11 +8,13 @@ mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
 });
 
+const hashedPassword = bcrypt.hashSync('password1', 10);
+
 const users = [
   {
     email: 'admin1@binar.com',
     mobile: '082122839089',
-    password: 'password1',
+    password: hashedPassword,
     name: 'admin1',
     username: 'admin1',
     imageProfile:
