@@ -1,4 +1,3 @@
-// models/userModel.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -16,11 +15,14 @@ const userSchema = new mongoose.Schema({
   city: String,
   passwordResetExp: Date,
   otp: Number,
-  role: String,
+  role: {
+    type: String,
+    default: 'User',
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
 });
 
-const UserModel = mongoose.model('User', userSchema);
+const Users = mongoose.model('User', userSchema);
 
-module.exports = UserModel;
+module.exports = Users;

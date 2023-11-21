@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
-const UserModel = require('../models/Users');
+const Users = require('../models/Users');
 
 mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
@@ -29,9 +29,7 @@ const users = [
 
 async function seedDatabase() {
   try {
-    await UserModel.deleteMany();
-
-    await UserModel.insertMany(users);
+    await Users.insertMany(users);
 
     console.log('Database seeded successfully');
   } catch (error) {
